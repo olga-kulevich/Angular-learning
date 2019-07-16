@@ -1,0 +1,26 @@
+<passenger-count></passenger-count>
+<passenger-detail></passenger-detail>
+
+<h3>AirLine Passengers</h3>
+<ul>
+  <li *ngFor="let passenger of passengers; let i = index;">
+    <!-- passenger -->
+    <span class="status" [style.backgroundColor]="passenger.checkedIn ? 'green' : 'red'"></span>
+    {{i}} : {{passenger.fullname}}
+    <div class="children">
+      Children: {{passenger.children?.length || 0}}
+    </div>
+  </li>
+</ul>
+
+<h3>AirLine Passengers</h3>
+<ul>
+  <li *ngFor="let passenger of passengers; let i = index;">
+    <!-- passenger -->
+    <span class="status" [ngStyle]="{
+      backgroundColor: (passenger.checkedIn ? 'green' : 'red')}"
+    ></span>
+    {{i}} : {{passenger.fullname}}
+    <p>{{passenger | json}}</p>
+  </li>
+</ul>
