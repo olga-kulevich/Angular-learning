@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 
 import {Passenger} from "../../models/passenger.interface";
 
@@ -8,18 +8,60 @@ import {Passenger} from "../../models/passenger.interface";
   template: `
     <div>
       <span class="status" [class.checked-in]="detail.checkedIn"></span>
-      {{detail.fullname}}
+      <div *ngIf="editing">
+        <input 
+          type="text"
+          [value]="detail.fullname"
+          (input)="onNameChange(name.value)"
+          #name>
+      </div>
       
+      <div *ngIf="!editing">
+        {{detail.fullname}}
+      
+        
       <div class="children">
         Children:
         {{detail.children?.length || 0}}
-      </div>  
+      </div> 
+        
     </div>
+    <button (click)="toggleEdit()">
+      {{editing ? 'Done' : 'Edit'}}
+    </button>
+      
+    <button (click)="onRemove()">
+      Remove
+    </button>
   `
 })
 
 export class PassengerDetailComponent {
+
+  editing: boolean = false;
+
   @Input()
   detail: Passenger;
+
+  @Output()
+  edit: EventEmitter<any> = new EventEmitter();
+
+  @Output()
+  remove: EventEmitter<any> = new EventEmitter();
+
   constructor() {}
+
+  onNameChange(value: string) {
+    this.detail.fullname = value;
+  }
+  toggleEdit() {
+    if(this.editing) {
+      this.edit.emit(this.detail);
+    }
+    this.editing = !this.editing;
+  }
+
+  onRemove() {
+    this.remove.emit(this.detail);
+  }
 }

@@ -4,5 +4,8 @@
 
 <passenger-detail
   *ngFor="let passenger of passengers;"
-  [detail]="passenger">
+  [detail]="passenger"
+  (remove)="handleRemove($event)"
+  (edit)="handleEdit($event)"
+>
 </passenger-detail>
