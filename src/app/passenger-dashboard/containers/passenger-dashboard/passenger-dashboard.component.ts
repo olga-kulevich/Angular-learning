@@ -7,10 +7,13 @@ import {Passenger} from "../../models/passenger.interface";
   templateUrl: './passenger-dashboard.component.html'
 })
 
-export class PassengerDashboardComponent implements OnInit{
+export class PassengerDashboardComponent implements OnInit {
   passengers: Passenger[];
-  constructor(){}
-  ngOnInit(){
+
+  constructor() {
+  }
+
+  ngOnInit() {
     console.log('ngOnInit');
     this.passengers = [{
       id: 1,
@@ -19,19 +22,28 @@ export class PassengerDashboardComponent implements OnInit{
       checkedInDate: 1490742000000,
       children: null
     },
-    {
-      id: 2,
-      fullname: 'Olalla',
-      checkedIn: false,
-      checkedInDate: null,
-      children: [{name: 'Victor', age: 2}]
-    }];
+      {
+        id: 2,
+        fullname: 'Olalla',
+        checkedIn: false,
+        checkedInDate: null,
+        children: [{name: 'Victor', age: 2}]
+      }];
   }
-  handleRemove(event) {
-    console.log(event);
+
+  handleRemove(event: Passenger) {
+    this.passengers = this.passengers.filter((passenger: Passenger) => {
+      return passenger.id !== event.id;
+    });
   }
 
   handleEdit(event) {
-    console.log(event);
+    this.passengers = this.passengers.map((passenger: Passenger) => {
+      if (passenger.id === event.id) {
+        passenger = Object.assign({}, passenger, event);
+      }
+      return passenger;
+    });
+    console.log(this.passengers);
   }
 }
