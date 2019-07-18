@@ -2,37 +2,22 @@
   "passengers": [
     {
       "id": 1,
-      "fullname": "Ola1232tjuty",
+      "fullname": "Ola",
       "checkedIn": false,
       "checkedInDate": null,
-      "children": [
-        {
-          "name": "Victor",
-          "age": 2
-        }
-      ]
+      "baggage": ""
     }, {
       "id": 2,
       "fullname": "uiuouioiuou",
       "checkedIn": false,
       "checkedInDate": null,
-      "children": [
-        {
-          "name": "Victor",
-          "age": 2
-        }
-      ]
+      "baggage": ""
     }, {
       "id": 3,
       "fullname": "gdfhhdgfhdfh",
       "checkedIn": false,
       "checkedInDate": null,
-      "children": [
-        {
-          "name": "Victor",
-          "age": 2
-        }
-      ]
+      "baggage": ""
     }
   ]
 }

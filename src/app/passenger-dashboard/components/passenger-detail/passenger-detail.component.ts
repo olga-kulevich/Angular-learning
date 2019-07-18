@@ -18,21 +18,17 @@ import {Passenger} from "../../models/passenger.interface";
       
       <div *ngIf="!editing">
         {{detail.fullname}}
+        
+      </div>
       
+      <button (click)="toggleEdit()">
+        {{editing ? 'Done' : 'Edit'}}
+      </button>
         
-      <div class="children">
-        Children:
-        {{detail.children?.length || 0}}
-      </div> 
-        
+      <button (click)="onRemove()">
+        Remove
+      </button>
     </div>
-    <button (click)="toggleEdit()">
-      {{editing ? 'Done' : 'Edit'}}
-    </button>
-      
-    <button (click)="onRemove()">
-      Remove
-    </button>
   `
 })
 

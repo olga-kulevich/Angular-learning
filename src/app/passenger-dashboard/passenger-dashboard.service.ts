@@ -16,12 +16,14 @@ export class PassengerDashboardService {
 
   getPassengers(): Observable<Passenger> {
     return this.http.get(PASSENGER_API).pipe(
-      map((response: any) => response)).pipe(catchError((error: any) => throwError(error.json)))
+      map((response: any) => response),
+      catchError((error: any) => throwError(error.json)))
   }
 
   getPassenger(id: number): Observable<Passenger> {
     return this.http.get(`${PASSENGER_API}/${id}`).pipe(
-      map((response: any) => response)).pipe(catchError((error: any) => throwError(error.json)))
+      map((response: any) => response))
+      .pipe(catchError((error: any) => throwError(error.json)))
   }
 
   updatePassenger(passenger: Passenger): Promise<Passenger> {
