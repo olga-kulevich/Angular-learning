@@ -14,7 +14,10 @@ import {Baggage} from "../../models/baggege.interface";
         <input
           type="text"
           name="fullname"
+          required
+          #fullname="ngModel"
           [ngModel]="detail?.fullname">
+        {{fullname.errors | json}}
       </div>
 
       <div>
@@ -22,7 +25,10 @@ import {Baggage} from "../../models/baggege.interface";
         <input
           type="number"
           name="id"
+          #id="ngModel"
+          required
           [ngModel]="detail?.id">
+        {{id.errors | json}}
       </div>
       
       <div>
@@ -72,7 +78,9 @@ import {Baggage} from "../../models/baggege.interface";
         </select>
       </div>
 
-      {{form.value | json}}
+      <div>{{form.value | json}}</div>
+      <div>Valid: {{form.valid | json}}</div>
+      <div>Invalid: {{form.invalid | json}}</div>
     </form>
   `
 })
