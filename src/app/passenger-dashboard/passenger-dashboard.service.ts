@@ -14,8 +14,13 @@ export class PassengerDashboardService {
   constructor(private http: HttpClient) {
   }
 
-  getPassengers(): Observable<Passenger[]> {
+  getPassengers(): Observable<Passenger> {
     return this.http.get(PASSENGER_API).pipe(
+      map((response: any) => response)).pipe(catchError((error: any) => throwError(error.json)))
+  }
+
+  getPassenger(id: number): Observable<Passenger> {
+    return this.http.get(`${PASSENGER_API}/${id}`).pipe(
       map((response: any) => response)).pipe(catchError((error: any) => throwError(error.json)))
   }
 

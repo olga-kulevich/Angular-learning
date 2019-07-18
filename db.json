@@ -1,8 +1,30 @@
 {
   "passengers": [
     {
-      "id": 3,
+      "id": 1,
       "fullname": "Ola1232tjuty",
+      "checkedIn": false,
+      "checkedInDate": null,
+      "children": [
+        {
+          "name": "Victor",
+          "age": 2
+        }
+      ]
+    }, {
+      "id": 2,
+      "fullname": "uiuouioiuou",
+      "checkedIn": false,
+      "checkedInDate": null,
+      "children": [
+        {
+          "name": "Victor",
+          "age": 2
+        }
+      ]
+    }, {
+      "id": 3,
+      "fullname": "gdfhhdgfhdfh",
       "checkedIn": false,
       "checkedInDate": null,
       "children": [
