@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, ElementRef, Input, ViewChild} from "@angular/core";
 
 import {Passenger} from "../../models/passenger.interface";
 
@@ -6,7 +6,7 @@ import {Passenger} from "../../models/passenger.interface";
   selector: 'passenger-form',
   styleUrls: ['passenger-form.component.scss'],
   template: `
-    <form #form="ngForm" novalidate>
+    <form #form="ngForm" novalidate >
       {{detail | json}}
       <div>
         Passenger Name
@@ -14,7 +14,6 @@ import {Passenger} from "../../models/passenger.interface";
           type="text"
           name="fullname"
           [ngModel]="detail?.fullname">
-        {{form.value | json}}
       </div>
 
       <div>
@@ -22,8 +21,37 @@ import {Passenger} from "../../models/passenger.interface";
         <input
           type="number"
           name="id"
-          [ngModel]="detail?.fullname">
+          [ngModel]="detail?.id">
       </div>
+      
+      <div>
+        <label>
+          <input
+            type="radio"
+            [value]="true"
+            name="checkedIn"
+            [ngModel]="detail?.checkedIn"
+            (ngModelChange)="toggleCheckIn($event)">
+          Yes
+        </label>
+        <label>
+          <input
+            type="radio"
+            [value]="false"
+            name="checkedIn"
+            [ngModel]="detail?.checkedIn"
+            (ngModelChange)="toggleCheckIn($event)">
+          No
+        </label>
+      </div>
+      
+        <div *ngIf="form.value.checkedIn">
+          Check In Date:
+          <input
+            type="number"
+            name="checkInDate"
+            [ngModel]="detail?.checkInDate">
+        </div>
 
       {{form.value | json}}
     </form>
@@ -33,4 +61,15 @@ import {Passenger} from "../../models/passenger.interface";
 export class PassengerFormComponent {
   @Input()
   detail: Passenger;
+
+  @ViewChild('form')
+  form: ElementRef;
+
+  toggleCheckIn(checkedIn: boolean) {
+    if (checkedIn) {
+      this.detail.checkInDate = Date.now();
+    }
+    this.form.nativeElement
+    console.log(this.form);
+  }
 }
