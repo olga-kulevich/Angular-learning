@@ -1,6 +1,7 @@
 import {Component, ElementRef, Input, ViewChild} from "@angular/core";
 
 import {Passenger} from "../../models/passenger.interface";
+import {Baggage} from "../../models/baggege.interface";
 
 @Component ({
   selector: 'passenger-form',
@@ -31,7 +32,6 @@ import {Passenger} from "../../models/passenger.interface";
             name="checkedIn"
             [ngModel]="detail?.checkedIn"
             (ngModelChange)="toggleCheckIn($event)">
-          Yes
         </label>
       </div>
       
@@ -42,6 +42,35 @@ import {Passenger} from "../../models/passenger.interface";
             name="checkInDate"
             [ngModel]="detail?.checkInDate">
         </div>
+      
+      <div>
+        Luggage
+        <select
+        name="baggage"
+        [ngModel]="detail?.baggage">
+          <option
+          *ngFor="let item of baggage"
+          [value]="item.key"
+          [selected]="item.key === detail?.baggage"
+          >
+            {{item.value}}
+          </option>
+        </select>
+      </div>
+
+      <div>
+        Luggage
+        <select
+          name="baggage"
+          [ngModel]="detail?.baggage">
+          <option
+            *ngFor="let item of baggage"
+            [ngValue]="item.key"
+          >
+            {{item.value}}
+          </option>
+        </select>
+      </div>
 
       {{form.value | json}}
     </form>
@@ -49,17 +78,26 @@ import {Passenger} from "../../models/passenger.interface";
 })
 
 export class PassengerFormComponent {
+  baggage: Baggage[] = [{
+    key: 'none',
+    value: 'no baggage'
+  },{
+    key: 'hold-only',
+    value: 'hold baggage'
+  },{
+    key: 'hand-only',
+    value: 'hand baggage'
+  }, {
+    key: 'hand-hold',
+    value: 'hand and hold baggage'
+  }];
+
   @Input()
   detail: Passenger;
-
-  @ViewChild('form')
-  form: ElementRef;
 
   toggleCheckIn(checkedIn: boolean) {
     if (checkedIn) {
       this.detail.checkInDate = Date.now();
     }
-    this.form.nativeElement
-    console.log(this.form);
   }
 }
