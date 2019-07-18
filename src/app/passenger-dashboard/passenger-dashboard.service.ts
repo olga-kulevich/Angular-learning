@@ -13,13 +13,11 @@ export class PassengerDashboardService {
   constructor(private http: HttpClient) {
   }
 
-  getPassengers(): Observable<Passenger> {
-    return this.http.get(PASSENGER_API).pipe(
-      map((response: any) => response)
-    );
+  getPassengers(): Promise<Passenger[]> {
+    return this.http.get(PASSENGER_API).toPromise().then((response: any) => response)
   }
 
-  updatePassenger(passenger: Passenger): Observable<Passenger> {
+  updatePassenger(passenger: Passenger): Promise<Passenger> {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
@@ -28,15 +26,11 @@ export class PassengerDashboardService {
     };
 
     return this.http.put(`${PASSENGER_API}/${passenger.id}`, passenger, options)
-      .pipe(
-        map((response: any) => response)
-      );
+     .toPromise().then((response: any) => response)
   }
 
-  removePassenger(passenger: Passenger): Observable<Passenger> {
+  removePassenger(passenger: Passenger): Promise<Passenger> {
     return this.http.delete(`${PASSENGER_API}/${passenger.id}`)
-      .pipe(
-        map((response: any) => response)
-      );
+      .toPromise().then((response: any) => response)
   }
 }
