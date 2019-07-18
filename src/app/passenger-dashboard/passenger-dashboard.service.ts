@@ -1,8 +1,9 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
-import {Observable} from "rxjs";
+import {Observable, throwError} from "rxjs";
 import {map} from "rxjs/operators";
+import {catchError } from "rxjs/operators";
 
 import {Passenger} from './models/passenger.interface';
 
@@ -13,8 +14,9 @@ export class PassengerDashboardService {
   constructor(private http: HttpClient) {
   }
 
-  getPassengers(): Promise<Passenger[]> {
-    return this.http.get(PASSENGER_API).toPromise().then((response: any) => response)
+  getPassengers(): Observable<Passenger[]> {
+    return this.http.get(PASSENGER_API).pipe(
+      map((response: any) => response)).pipe(catchError((error: any) => throwError(error.json)))
   }
 
   updatePassenger(passenger: Passenger): Promise<Passenger> {
