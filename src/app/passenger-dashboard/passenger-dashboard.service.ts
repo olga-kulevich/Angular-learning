@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
@@ -13,9 +13,23 @@ export class PassengerDashboardService {
   constructor(private http: HttpClient) {
   }
 
-  getPassengers(): Observable<Passenger[]> {
+  getPassengers(): Observable<Passenger> {
     return this.http.get(PASSENGER_API).pipe(
       map((response: any) => response)
     );
+  }
+
+  updatePassenger(passenger: Passenger): Observable<Passenger> {
+    return this.http.put(`${PASSENGER_API}/${passenger.id}`, passenger)
+      .pipe(
+        map((response: any) => response)
+      );
+  }
+
+  removePassenger(passenger: Passenger): Observable<Passenger> {
+    return this.http.delete(`${PASSENGER_API}/${passenger.id}`)
+      .pipe(
+        map((response: any) => response)
+      );
   }
 }
