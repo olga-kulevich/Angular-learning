@@ -15,7 +15,7 @@ export class PassengerDashboardService {
 
   getPassengers(): Observable<Passenger[]> {
     return this.http.get(PASSENGER_API).pipe(
-      map((response: HttpResponse) => response.json())
+      map((response: any) => response)
     );
   }
 }
