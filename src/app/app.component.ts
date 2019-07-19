@@ -1,5 +1,11 @@
 import {Component} from '@angular/core';
 
+interface Nav {
+  link: string,
+  name: string,
+  exact: boolean
+}
+
 @Component({
   selector: 'app-root',
   styleUrls: ['app.component.scss'],
@@ -7,4 +13,19 @@ import {Component} from '@angular/core';
 })
 
 export class AppComponent {
+  nav: Nav[] = [
+    {
+      link: '/',
+      name: 'Home',
+      exact: true
+    }, {
+      link: '/passengers',
+      name: 'Passengers',
+      exact: true
+    }, {
+      link: '/ooops',
+      name: '404',
+      exact: false
+    }
+  ];
 }
