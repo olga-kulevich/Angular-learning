@@ -1,18 +1,19 @@
 {
   "passengers": [
     {
+      "fullname": "Ola Kugf",
       "id": 1,
-      "fullname": "Ola",
       "checkedIn": true,
-      "checkedInDate": null,
       "baggage": "none"
-    }, {
+    },
+    {
       "id": 2,
       "fullname": "uiuouioiuou",
       "checkedIn": false,
       "checkedInDate": null,
       "baggage": ""
-    }, {
+    },
+    {
       "id": 3,
       "fullname": "gdfhhdgfhdfh",
       "checkedIn": false,

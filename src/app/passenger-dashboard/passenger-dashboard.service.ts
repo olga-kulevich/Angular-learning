@@ -21,12 +21,16 @@ export class PassengerDashboardService {
   }
 
   getPassenger(id: number): Observable<Passenger> {
-    return this.http.get(`${PASSENGER_API}/${id}`).pipe(
-      map((response: any) => response))
-      .pipe(catchError((error: any) => throwError(error.json)))
+    return this.http.get(`${PASSENGER_API}/${id}`)
+      .pipe(
+        map((response: any) => response)
+      )
+      .pipe(
+        catchError((error: any) => throwError(error.json))
+      )
   }
 
-  updatePassenger(passenger: Passenger): Promise<Passenger> {
+  updatePassenger(passenger: Passenger): Observable<Passenger> {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
@@ -35,7 +39,10 @@ export class PassengerDashboardService {
     };
 
     return this.http.put(`${PASSENGER_API}/${passenger.id}`, passenger, options)
-     .toPromise().then((response: any) => response)
+     .pipe(
+       map((response: any) => response),
+       catchError((error: any) => throwError(error.json))
+     )
   }
 
   removePassenger(passenger: Passenger): Promise<Passenger> {
