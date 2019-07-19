@@ -15,9 +15,12 @@ import {Baggage} from "../../models/baggege.interface";
           type="text"
           name="fullname"
           required
+          minlength="0"
           #fullname="ngModel"
           [ngModel]="detail?.fullname">
-        {{fullname.errors | json}}
+        <div *ngIf="fullname.errors?.minlength && fullname.dirty" class="error">
+          Passenger name is required
+        </div>
       </div>
 
       <div>
@@ -25,10 +28,12 @@ import {Baggage} from "../../models/baggege.interface";
         <input
           type="number"
           name="id"
-          #id="ngModel"
           required
+          #id="ngModel"
           [ngModel]="detail?.id">
-        {{id.errors | json}}
+        <div *ngIf="id.errors?.required && id.touched" class="error">
+          Passenger ID is required
+        </div>
       </div>
       
       <div>
